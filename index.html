@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>tank</title>
-    <!-- <meta name="viewport"  -->
-    <!-- content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
     <style>
     .center {
@@ -25,20 +25,64 @@
     #joystick {
       position: absolute;
       left: 10%;   /* Adjust left margin */
-      bottom: 30%; /* Adjust bottom margin */
+      bottom: 25%; /* Adjust bottom margin */
       height: 40%;  /* Adjust as needed */
       width: 20%;   /* Adjust as needed */
       /* background: rgba(0, 255, 0, 0.1); */
       border-radius: 10px; /* Optional: rounded edges */
     }
+
+
+    #buttons {
+      position: absolute;
+      bottom: 30%;
+      right: 5%;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+    }
+
+    .button {
+      width: 50px;
+      height: 50px;
+      background-color: gold;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #up { top: 0; left: 50%; transform: translateX(-50%); }
+    #down { bottom: 0; left: 50%; transform: translateX(-50%); }
+    #left { left: 0; top: 50%; transform: translateY(-50%); }
+    #right { right: 0; top: 50%; transform: translateY(-50%); }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/nipplejs@0.10.2/dist/nipplejs.min.js"></script>
-    <script type="module" crossorigin src="./assets/index-CM6NlJyr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" crossorigin src="./assets/index-RTVwJUY3.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/kaplay-DBPwJhjK.js">
   </head>
   <body class="center" style="overflow:hidden">
+
     <div id="joystick">
     </div>
+    <button style="position: absolute; right: 10%; top: 10%;" id="fullscreen-button">fullscreen</button>
+
+    <div id="buttons">
+      <div class="button" id="up"></div>
+      <div class="button" id="left"></div>
+      <div class="button" id="right"></div>
+      <div class="button" id="down"></div>
+    </div>
+
     <script>
     const scaleCanvas = () => {
       const canvas = document.querySelector("canvas");
@@ -67,7 +111,38 @@
 
     window.addEventListener("resize", scaleCanvas);
 
-    window.scrollTo(0, 1);
+    function toggleFullscreen() {
+      if (!document.fullscreenElement && // Standard
+        !document.mozFullScreenElement && // Firefox
+        !document.webkitFullscreenElement && // Chrome, Safari, Opera
+        !document.msFullscreenElement) { // IE/Edge
+        // Enter fullscreen
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+          document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+          document.documentElement.msRequestFullscreen();
+        }
+      } else {
+        // Exit fullscreen
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { // Firefox
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { // Chrome, Safari, Opera
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { // IE/Edge
+          document.msExitFullscreen();
+        }
+      }
+    }
+
+    // Attach to button click event
+    document.getElementById('fullscreen-button').addEventListener('click', toggleFullscreen);
+
     </script>
   </body>
 </html>
