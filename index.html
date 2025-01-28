@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>tank</title>
-    <meta name="viewport" 
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <!-- <meta name="viewport"  -->
+    <!-- content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/> -->
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
     <style>
     .center {
@@ -12,11 +12,33 @@
       align-items: center; /* Vertical alignment */
       height: 100vh; /* Full viewport height */
     }
-</style>
-    <script type="module" crossorigin src="./assets/index-CHv_alZS.js"></script>
+
+    /* TOOD: change joystick position based on its orientation
+@media screen and (orientation:portrait) {
+// CSS applied when the device is in portrait mode
+}
+
+@media screen and (orientation:landscape) {
+// CSS applied when the device is in landscape mode
+}
+*/
+    #joystick {
+      position: absolute;
+      left: 10%;   /* Adjust left margin */
+      bottom: 30%; /* Adjust bottom margin */
+      height: 40%;  /* Adjust as needed */
+      width: 20%;   /* Adjust as needed */
+      /* background: rgba(0, 255, 0, 0.1); */
+      border-radius: 10px; /* Optional: rounded edges */
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/nipplejs@0.10.2/dist/nipplejs.min.js"></script>
+    <script type="module" crossorigin src="./assets/index-CM6NlJyr.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/kaplay-DBPwJhjK.js">
   </head>
   <body class="center" style="overflow:hidden">
+    <div id="joystick">
+    </div>
     <script>
     const scaleCanvas = () => {
       const canvas = document.querySelector("canvas");
