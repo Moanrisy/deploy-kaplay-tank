@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>tank</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
+    <style>
+    .center {
+      display: flex;
+      justify-content: center; /* Horizontal alignment */
+      align-items: center; /* Vertical alignment */
+      height: 100vh; /* Full viewport height */
+    }
+</style>
+    <script type="module" crossorigin src="./assets/index-CHv_alZS.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/kaplay-DBPwJhjK.js">
+  </head>
+  <body class="center" style="overflow:hidden">
+    <script>
+    const scaleCanvas = () => {
+      const canvas = document.querySelector("canvas");
+      if (!canvas) return;
+
+      // Get the window size
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      // Original game size (adjust based on your game)
+      const gameWidth = 800
+      const gameHeight = 640
+
+      // Scale factor (smallest ratio to fit inside window)
+      const scale = Math.min(windowWidth / gameWidth, windowHeight / gameHeight);
+
+      // Apply scaling while maintaining aspect ratio
+      canvas.style.width = `${gameWidth * scale}px`;
+      canvas.style.height = `${gameHeight * scale}px`;
+      canvas.style.transformOrigin = "top left";
+    };
+
+    window.onload = () => {
+      scaleCanvas(); // Run it once when the page loads
+    };
+
+    window.addEventListener("resize", scaleCanvas);
+    </script>
+  </body>
+</html>
